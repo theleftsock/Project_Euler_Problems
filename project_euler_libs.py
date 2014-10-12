@@ -71,22 +71,22 @@ def get_list_product(list):
         product = product * x
     return product
 
-def max_sub_list(list,item_count):
+def max_sub_list(list,item_count):  #takes a list of n length, and calculates teh max product of all adjacents of item_count
     adj_items = []
     max_product = 0
     max_adj_items = []
     for item in list:
-        print "item:",item
+        #print "item:",item
         if (item == '\n'):
             continue
         if (len(adj_items) < item_count):
-            adj_digits.append(item)
+            adj_items.append(item)
             continue
-        adj_items.pop(0)
-        adj_items.append(item)
         product = get_list_product(adj_items)
-        print "product:",product
+        #print "product:",product
         if (product > max_product) and (len(adj_items) == item_count):
             max_product = product
             max_adj_items = adj_items[:]
+        adj_items.pop(0)
+        adj_items.append(item)
     return max_product

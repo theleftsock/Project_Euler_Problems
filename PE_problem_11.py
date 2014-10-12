@@ -32,6 +32,7 @@ What is the greatest product of four adjacent numbers in the same direction (up,
 or diagonally) in the 20x20 grid?
 """
 
+item_count = 4
 fn = 'PE_problem_11_data.txt'
 fh = open(fn,'r')
 file_data = fh.read()
@@ -40,9 +41,9 @@ file_lines = file_data.split('\n')
 rows = []
 cols = [[]]
 for row in file_lines:
-    print "row:",row
+    #print "row:",row
     row = row.split()
-    print "row:",row
+    #print "row:",row
     rows.append(row)
     idx = 0
     for item in row:
@@ -57,11 +58,34 @@ for row in file_lines:
         idx = idx + 1
 
 import numpy as np
+matrix = np.array(rows) #needed 
+#print rows
+all_diags = [matrix[::-1,:].diagonal(i) for i in range(-matrix.shape[0]+1,matrix.shape[1])]
+all_diags.extend(matrix.diagonal(i) for i in range(matrix.shape[1]-1,-matrix.shape[0],-1))
+#print [n.tolist() for n in all_diags]
+diags = []
+for diag in all_diags:
+    new_list = list(diag)
+    #print new_list
+    if (len(new_list) >= item_count):
+        diags.append(new_list)
 
-matrix = np.array(rows)
+row_maxes = []
+col_maxes = []
+diag_maxes = []
+for row in rows:
+    row_max_product = max_sub_list(row,item_count)
+    row_maxes.append(row_max_product)
 
-diags = [matrix[::-1,:].diagonal(i) for i in range(-3,4)]
-diags.extend(matrix.diagonal(i) for i in range(3,-4,-1))
-print [n.tolist() for n in diags]
-print rows
-print cols
+for col in cols:
+    col_max_product = max_sub_list(col,item_count)
+    col_maxes.append(col_max_product)
+
+for diag in diags:
+    diag_max_product = max_sub_list(diag,item_count)
+    diag_maxes.append(diag_max_product)
+
+all_maxes = row_maxes + col_maxes + diag_maxes
+max_product = max(all_maxes)
+print "max_product:",max_product
+
