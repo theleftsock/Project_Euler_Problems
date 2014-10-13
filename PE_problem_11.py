@@ -58,7 +58,7 @@ for row in file_lines:
         idx = idx + 1
 
 import numpy as np
-matrix = np.array(rows) #needed 
+matrix = np.array(rows) #needed
 #print rows
 all_diags = [matrix[::-1,:].diagonal(i) for i in range(-matrix.shape[0]+1,matrix.shape[1])]
 all_diags.extend(matrix.diagonal(i) for i in range(matrix.shape[1]-1,-matrix.shape[0],-1))

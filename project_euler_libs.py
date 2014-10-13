@@ -90,3 +90,17 @@ def max_sub_list(list,item_count):  #takes a list of n length, and calculates te
         adj_items.pop(0)
         adj_items.append(item)
     return max_product
+
+def get_divisors(num, pfs): #takes a number and returns the divisors
+    divs = [1,num]
+    for pf in pfs:
+        factor = pf
+        while (factor <= num/2):
+            if (num % factor == 0):
+                #print "factor:",factor
+                divs.append(factor)
+            factor = factor + pf
+    divs = list(set(divs))
+    return divs
+
+
