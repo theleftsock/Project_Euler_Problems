@@ -18,24 +18,58 @@ What is the value of the first triangle number to have over five hundred divisor
 # this is a test comment for pushing to the repo
 
 from project_euler_libs import *
+import time
+
+start_time = time.time()
+print "start_time:",start_time
+
+num = 100
+pfs = prime_factors(num)
+pfs = list(set(pfs))
+print "pfs:",pfs
+divs = get_divisors(num, pfs)
+print "num:",num
+print "divs:",divs
+print "len_divs:",len(divs)
 
 triang_num = 1
-idx = 0
+idx = 1
 max_divs = 0
 while (1):
+
+
+
+    next_triang_num = triang_num + idx + 1
     pfs = prime_factors(triang_num)
+    pfs1 = prime_factors(next_triang_num)
     divs = get_divisors(triang_num, pfs)
+    divs1 = get_divisors(next_triang_num,pfs1)
+    new_pfs = pfs + pfs1
+    new_pfs = list(set(new_pfs))
+    new_triang_num = triang_num * (next_triang_num)
+    if (new_triang_num > 100000000):
+        exit()
+    tot_divs = (new_triang_num, new_pfs)
+    print "triangle_num:",triang_num,"next_triangle_num:",next_triang_num,"idx:",idx,"new_triang_num:",new_triang_num
     #print "and the divs",divs
 
     #print "triangle_number:",triang_num,"div_count:",len(divs)
-    if (len(divs) > 500):
-        print "triang_num:",triang_num
-        print divs
-        break
-    if (len(divs) > max_divs):
-        max_divs = len(divs)
+    if (len(tot_divs) > 500):
+        print "the 500 triang_num:",new_triang_num
+        print tot_divs
+        print "length of divs:", len(tot_divs)
+        exit()
+    if (len(tot_divs) > 200):
+        print "the 200 triang_num:",new_triang_num,"idx:",idx
+        print tot_divs
+        print len(tot_divs)
+    if (len(tot_divs) > max_divs):
+        max_divs = len(tot_divs)
         print "max_divs:",max_divs
     if (idx % 1000 == 0):
         print "idx:",idx
     idx = idx + 1
     triang_num = triang_num + idx
+
+stop_time = time.time()
+delta_time = stop_time - start_time

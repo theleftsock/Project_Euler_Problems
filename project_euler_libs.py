@@ -91,7 +91,7 @@ def max_sub_list(list,item_count):  #takes a list of n length, and calculates te
         adj_items.append(item)
     return max_product
 
-def get_divisors(num, pfs): #takes a number and returns the divisors
+def get_divisors(num, pfs): #takes a number, the prime factors, and returns the divisors
     divs = [1,num]
     for pf in pfs:
         factor = pf
