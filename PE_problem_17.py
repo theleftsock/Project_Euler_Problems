@@ -20,14 +20,14 @@ for line in file_lines:
     vals = line.split()
     new_line = ""
     for val in vals:
-        print "val:",val
+        print "val:", val
         new_line = new_line+val
-    print "line:",line,"line total:",len(line), "new_line:",new_line
+    print "line:", line, "line total:",len(line), "new_line:",new_line
     total = len(new_line) + total
     searchObj = re.search( r'-', line, re.M|re.I)
     if searchObj:
         total = total - 1
         print "dash_found_line:",line
-    print "total: ",total
+    print "total: ", total
 total = total + (9 * 99 * 3)
-print "total: ",total
+print "total: ", total
